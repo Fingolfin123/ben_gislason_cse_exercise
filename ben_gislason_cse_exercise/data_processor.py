@@ -38,4 +38,5 @@ class DataProcessor:
         plotTables(df_1, df_2, tableNames)
     
         return path
-#my_data_processor = DataProcessor('c:/users/bgislas/Downloads/CSE_exercise_2021_09_29-13h_09m.db')
+
+

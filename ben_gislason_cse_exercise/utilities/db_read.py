@@ -10,9 +10,8 @@ def dbRead(dbConn, dbTable):
     to pandas dataframe for downstream analysis
 
     Parameters:
-        dbPath:
-            Path of database to be used for comparison table
-            this database if first copied to local output directory
+        dbConn:
+            connection to database to be used for comparison table
 
         dbTable:
             Name of table to convert to dataframe

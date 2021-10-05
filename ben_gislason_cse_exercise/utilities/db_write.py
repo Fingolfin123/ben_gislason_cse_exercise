@@ -22,9 +22,6 @@ def dbWrite(dbPath, dbTable, df):
         df:
             Dataframe representing selected table
 
-    Future versions of this will be used in class to 
-    read multiple file types
-
     '''
     path = str(os.getcwd()) + "/output"
     #print(path)
