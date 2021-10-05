@@ -15,7 +15,7 @@ class DataProcessor:
         self.path = db_path
         self.conn = openDb(self.path)       
 
-    def run_cse_exercise(self, path):
+    def run_cse_exercise(self):
         """
         Create dataframes and generate plot and
         summary statistical table in copy of 
@@ -33,10 +33,7 @@ class DataProcessor:
         #write new table using summary dataframe into a copy of db file that also contains summary table
         path = dbWrite(self.path, 'load_summary', df_out)
         self.conn.close()
+        print("Summary output database and load duration plot can be found here: " + os.path.dirname(path).replace("/","\\"))
 
         #plot load duration curves
         plotTables(df_1, df_2, tableNames)
-    
-        return path
-
-

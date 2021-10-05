@@ -42,8 +42,7 @@ def plotTables(df_1, df_2, tableNames):
         os.remove(savePath + 'load_duration.png')
    
     plt.savefig(savePath + '/load_duration.png')
-    print("Summary output database and load duration plot can be found here: " + savePath)
-    
+        
     plt.show()
     
 def plotLoad(load_df, tableNames):
