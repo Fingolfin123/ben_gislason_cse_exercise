@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 
-def dbWrite(dbPath, dbTable, df):
+def dbWrite(dbPath, dbTable, df, optional_path):
     '''
     Writes dataframe to summary database file. 
 
@@ -23,20 +23,18 @@ def dbWrite(dbPath, dbTable, df):
             Dataframe representing selected table
 
     '''
-    path = str(os.getcwd()) + "/output"
-    #print(path)
-    if not os.path.exists(path):
-        os.mkdir(path)
-        
-    dbPath_copy = path + "/" + Path(dbPath).stem + ".db"
-    dbPath_out = path + "/" + Path(dbPath).stem + "_summary.db"
+    if not os.path.exists(optional_path):
+        os.mkdir(optional_path)
+            
+    dbPath_out = optional_path + "/" + Path(dbPath).stem + "_summary.db"
     
     #clean up old file if exists
     if os.path.exists(dbPath_out):
         print("summary file exists. removing and replacing")
         os.remove(dbPath_out)
 
-    copyfile(dbPath_copy, dbPath_out)
+    #Copies output file to desired path
+    copyfile(dbPath, dbPath_out)
       
     try:
         conn = sqlite3.connect(dbPath_out)    

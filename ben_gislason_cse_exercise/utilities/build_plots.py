@@ -6,7 +6,7 @@ import seaborn as sb
 import os
 from shutil import copyfile
 
-def plotTables(df_1, df_2, tableNames):
+def plotTables(df_1, df_2, tableNames, optional_path):
     '''
     Receives data frames containing load data for 
     plotting and saves resulting plot figure.
@@ -35,11 +35,14 @@ def plotTables(df_1, df_2, tableNames):
     plt = plotLoad(df_1, tableNames)
     plt = plotLoad(df_2, tableNames)
 
-    savePath = str(os.getcwd()) + "/output"      #os.path.abspath(os.curdir)+"\\ben_gislason_cse_exercise\\tests\\"
+    if not os.path.exists(optional_path):
+        os.mkdir(optional_path)
+        
+    savePath = optional_path
     
-    if os.path.exists(savePath + 'load_duration.png'):
+    if os.path.exists(savePath + '/load_duration.png'):
         print("image file exists. removing and replacing")
-        os.remove(savePath + 'load_duration.png')
+        os.remove(savePath + '/load_duration.png')
    
     plt.savefig(savePath + '/load_duration.png')
         
