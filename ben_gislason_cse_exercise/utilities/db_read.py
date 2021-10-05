@@ -4,7 +4,7 @@ import os
 from shutil import copyfile
 from pathlib import Path
 
-def dbRead(dbPath, dbTable):
+def dbRead(dbConn, dbTable):
     '''
     Reads in SQLite database and converts table 
     to pandas dataframe for downstream analysis
@@ -12,7 +12,7 @@ def dbRead(dbPath, dbTable):
     Parameters:
         dbPath:
             Path of database to be used for comparison table
-            this database if first copied to local test directory
+            this database if first copied to local output directory
 
         dbTable:
             Name of table to convert to dataframe
@@ -25,19 +25,9 @@ def dbRead(dbPath, dbTable):
     read mutliple file types
 
     '''
-
-    dbPath_out = os.path.abspath(os.curdir)+"\\ben_gislason_cse_exercise\\tests\\" + Path(dbPath).stem + ".db"
-    copyfile(dbPath, dbPath_out)
-    
-    try:
-        conn = sqlite3.connect(dbPath_out)    
-    except Error as e:
-        print(e)
         
-    df = pd.read_sql_query('SELECT * FROM ' + dbTable, conn)
+    df = pd.read_sql_query('SELECT * FROM ' + dbTable, dbConn)
     
     return df
-
-    conn.close()
 
 

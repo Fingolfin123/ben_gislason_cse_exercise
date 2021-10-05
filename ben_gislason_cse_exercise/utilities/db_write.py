@@ -16,26 +16,30 @@ def dbWrite(dbPath, dbTable, df):
             this database is saved to local test directory
 
         dbTable:
-            Name of reuslting summary table
+            Name of resulting summary table
 
     Returns:
         df:
             Dataframe representing selected table
 
     Future versions of this will be used in class to 
-    read mutliple file types
+    read multiple file types
 
     '''
-
-    dbPath_copy = os.path.abspath(os.curdir)+"\\ben_gislason_cse_exercise\\tests\\" + Path(dbPath).stem + ".db"
-    dbPath_out = os.path.abspath(os.curdir)+"\\ben_gislason_cse_exercise\\tests\\" + Path(dbPath).stem + "_summary" + ".db"
+    path = str(os.getcwd()) + "/output"
+    #print(path)
+    if not os.path.exists(path):
+        os.mkdir(path)
+        
+    dbPath_copy = path + "/" + Path(dbPath).stem + ".db"
+    dbPath_out = path + "/" + Path(dbPath).stem + "_summary.db"
     
     #clean up old file if exists
     if os.path.exists(dbPath_out):
         print("summary file exists. removing and replacing")
         os.remove(dbPath_out)
 
-    copyfile(dbPath, dbPath_out)
+    copyfile(dbPath_copy, dbPath_out)
       
     try:
         conn = sqlite3.connect(dbPath_out)    
@@ -45,3 +49,5 @@ def dbWrite(dbPath, dbTable, df):
     df.to_sql(dbTable, conn, if_exists='fail')
     
     conn.close()
+
+    return dbPath_out

@@ -29,19 +29,19 @@ def plotTables(df_1, df_2, tableNames):
 
     Future version may include this as a class and 
     allow for various plot output options and ability 
-    to accomodate N plots
+    to accomadate N plots
 
     '''
     plt = plotLoad(df_1, tableNames)
     plt = plotLoad(df_2, tableNames)
 
-    savePath = os.path.abspath(os.curdir)+"\\ben_gislason_cse_exercise\\tests\\"
+    savePath = str(os.getcwd()) + "/output"      #os.path.abspath(os.curdir)+"\\ben_gislason_cse_exercise\\tests\\"
     
     if os.path.exists(savePath + 'load_duration.png'):
         print("image file exists. removing and replacing")
         os.remove(savePath + 'load_duration.png')
    
-    plt.savefig(savePath + 'load_duration.png')
+    plt.savefig(savePath + '/load_duration.png')
     print("Summary output database and load duration plot can be found here: " + savePath)
     
     plt.show()
